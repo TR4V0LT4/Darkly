@@ -14,3 +14,14 @@ curl — craft raw HTTP requests
 gobuster/dirb — discover hidden directories
 
 bashdirb http://172.16.60.128/
+
+
+5 XSS on feedback formtry <script>alert(1)</script>
+6 XSS on image searchsame idea different field
+7 File inclusion / path traversallook for ?page= in URLs
+8 File upload exploitupload a PHP as image
+9 Open redirecttamper with redirect URLs
+10 CSRFforms without tokens 
+12 Admin panel exposuretry /admin /administrator
+13 Sensitive data in sourcecheck page source comments
+14 HTTP header manipulationcheck Referer, User-Agent
