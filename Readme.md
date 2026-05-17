@@ -1,3 +1,15 @@
+# NMAP
+nmap 192.168.56.101   
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2026-05-17 14:33 +01
+Nmap scan report for 192.168.56.101 (192.168.56.101)
+Host is up (0.069s latency).
+Not shown: 999 closed tcp ports (conn-refused)
+PORT   STATE SERVICE
+80/tcp open  http
+
+Nmap done: 1 IP address (1 host up) scanned in 1.14 seconds
+
+
 dirb http://192.168.56.101//
 
 -----------------
