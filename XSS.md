@@ -227,7 +227,7 @@ Depending on the application, also avoid allowing:
 data:
 unsafe-inline
 *
-```
+``
 
 in sensitive directives.
 

