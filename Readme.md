@@ -1,60 +1,9 @@
-# NMAP
-nmap 192.168.56.101   
-Starting Nmap 7.94SVN ( https://nmap.org ) at 2026-05-17 14:33 +01
-Nmap scan report for 192.168.56.101 (192.168.56.101)
-Host is up (0.069s latency).
-Not shown: 999 closed tcp ports (conn-refused)
-PORT   STATE SERVICE
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 1.14 seconds
-
-
-dirb http://192.168.56.101//
-
------------------
-DIRB v2.22    
-By The Dark Raver
------------------
-
-START_TIME: Sat May 16 21:06:29 2026
-URL_BASE: http://192.168.56.101//
-WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
-
------------------
-
-GENERATED WORDS: 4612                                                          
-
----- Scanning URL: http://192.168.56.101// ----
-+ http://192.168.56.101//admin (CODE:301 SIZE:193)                                                                                                                                                                                                        
-+ http://192.168.56.101//audio (CODE:301|SIZE:193)                                                                                                                                                                                                        
-+ http://192.168.56.101//css (CODE:301|SIZE:193)                                                                                                                                                                                                          
-+ http://192.168.56.101//errors (CODE:301|SIZE:193)                                                                                                                                                                                                       
-+ http://192.168.56.101//favicon.ico (CODE:200|SIZE:1406)                                                                                                                                                                                                 
-+ http://192.168.56.101//fonts (CODE:301|SIZE:193)                                                                                                                                                                                                        
-+ http://192.168.56.101//images (CODE:301|SIZE:193)                                                                                                                                                                                                       
-+ http://192.168.56.101//includes (CODE:301|SIZE:193)                                                                                                                                                                                                     
-+ http://192.168.56.101//index.php (CODE:200|SIZE:6892)                                                                                                                                                                                                   
-+ http://192.168.56.101//js (CODE:301|SIZE:193)                                                                                                                                                                                                           
-+ http://192.168.56.101//robots.txt (CODE:200|SIZE:53)                                                                                                                                                                                                    
-+ http://192.168.56.101//whatever (CODE:301|SIZE:193)                                                                                                                                                                                                     
-                                                                                                                                                                                                                                                          
------------------
-END_TIME: Sat May 16 21:06:34 2026
-DOWNLOADED: 4612 - FOUND: 12
-
-------------------------------------------------------------------------------------
-
-# USING GO BUSTER:
+# INSPECTING IP USING GO BUSTER:
 sudo apt install gobuster
 sudo snap install seclists
 
-> gobuster dir -u http://192.168.56.101/ -w /usr/share/dirb/wordlists/common.txt --exclude-length 975
+> gobuster dir -u http://192.168.56.101/ -w /usr/share/dirb/wordlists/common.txt --exclude-length 975 -x php,html,txt
 
-gobuster dir -u http://192.168.56.101/ -w /usr/share/dirb/wordlists/common.txt --exclude-length 975 -x php,html,txt
-===============================================================
-Gobuster v3.6
-by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 ===============================================================
 [+] Url:                     http://192.168.56.101/
 [+] Method:                  GET

