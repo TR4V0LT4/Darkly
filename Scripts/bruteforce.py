@@ -4,7 +4,7 @@ URL = "http://192.168.1.41/index.php"
 
 session = requests.Session()
 
-with open("passwords.txt") as passwords:
+with open("../Resources/passwords.txt") as passwords:
     for password in passwords:
         password = password.strip()
 
