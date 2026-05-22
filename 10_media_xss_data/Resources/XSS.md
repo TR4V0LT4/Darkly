@@ -29,8 +29,6 @@ That payload worked and revealed:
 I_am_admin=68934a3e9455fa72420237eb05902327
 ```
 
-However, that cookie was already related to a previously solved flag, so it did not count as a new XSS flag. It only confirmed that the application had XSS-prone areas.
-
 After that, we looked for a different XSS context. The important clue was the presence of URL parameters that control content loaded by the page. In Darkly, one of those parameters is:
 
 ```txt
