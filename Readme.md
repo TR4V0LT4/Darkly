@@ -1,36 +1,79 @@
+# Darkly
 
-<<<<<<< HEAD
+Darkly is a web security project focused on finding and explaining vulnerabilities in a deliberately vulnerable web application.
+
+The goal is not only to get the flags, but to understand each breach, explain the exploitation path, and describe how the issue should be fixed.
+
+## Project Structure
+
+Each breach is stored in its own folder:
+
+```txt
+{breach_name}/
+├── flag
+└── Resources/
+    └── README.md
 ```
-=======
 
+The `flag` file contains the final flag for that breach.
 
+The `Resources/README.md` file explains:
 
-<!--
-Voila un peu de lecture :
+- where the vulnerability is located
+- how it was discovered
+- the payload or request used
+- why the vulnerability works
+- the impact
+- how to prevent it
 
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+## Breaches
 
+```txt
+01_admin_cookie
+02_bruteforce_login
+03_header_spoofing
+04_unvalidated_redirect
+05_survey_tampering
+06_password_recovery_hidden_email
+07_file_upload_mime_bypass
+08_media_xss_data_uri
+09_feedback_stored_xss
+10_member_sql_injection
+11_image_sql_injection
+12_path_traversal
+13_robots_htpasswd
+14_hidden_directory_file_discovery
+```
 
--->
+## Main Topics Covered
 
-<!-- 
+- Cookie tampering
+- Bruteforce protection bypass
+- HTTP header spoofing
+- Unvalidated redirects
+- Client-side value tampering
+- Password recovery logic flaws
+- File upload validation bypass
+- Cross-site scripting
+- SQL injection
+- Path traversal
+- Sensitive file exposure
+- Directory discovery
 
-Fun right ?
-source: loem.
-Good bye  !!!!
+## Notes
 
--->
+No automated exploitation tools such as `sqlmap` were used.
 
-<!--
-You must come from : "https://www.nsa.gov/".
--->
+When scripts are included, they are small, custom, and used only to demonstrate or reproduce a specific manual finding.
 
-<!--
-Where does it come from?
-Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+The important part of the project is being able to explain each vulnerability clearly during evaluation.
 
-The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+## Security Lessons
 
+User input must never be trusted directly.
 
--->
->>>>>>> ef6e22b (structring files)
+Security decisions must be enforced server-side.
+
+Client-side controls, hidden fields, cookies, headers, MIME types, and URL parameters can all be modified by an attacker.
+
+Proper fixes include prepared statements, strict server-side validation, output escaping, secure session handling, allowlists, safe file upload handling, and least-privilege access.
